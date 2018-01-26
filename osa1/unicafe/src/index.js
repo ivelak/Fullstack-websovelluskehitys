@@ -36,6 +36,30 @@ class App extends React.Component {
             huono: this.state.huono + 1
         })
     }
+    keskiarvo = () => {
+        const ka = (this.state.hyva - this.state.huono) / (this.state.hyva + this.state.neutraali + this.state.huono)
+        console.log(ka)
+        if (isNaN(ka)){
+            return (
+                0
+            )
+        }
+        return (
+            ka
+        )
+    }
+    posit = () => {
+        const prossa=(this.state.hyva/(this.state.hyva + this.state.neutraali + this.state.huono))*100
+        if (isNaN(prossa)){
+            return (
+                0
+            )
+        }
+        return (
+            prossa 
+        )
+    }
+
 
     render() {
         return (
@@ -51,6 +75,8 @@ class App extends React.Component {
                     <Display laatu='hyvä' counter={this.state.hyva} />
                     <Display laatu='neutraali' counter={this.state.neutraali} />
                     <Display laatu='huono' counter={this.state.huono} />
+                    <Display laatu='keskiarvo' counter={this.keskiarvo()} />
+                    <Display laatu='positiivista' counter={this.posit() + ' %'} />
                 </div>
 
             </div>
