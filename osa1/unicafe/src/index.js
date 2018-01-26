@@ -14,6 +14,13 @@ const Button = (props) => {
 }
 
 const Statistics = (props) => {
+    if (props.hyva + props.neutraali + props.huono === 0) {
+        return (
+            <div>
+                <p>ei palautteita vielä</p>
+            </div>
+        )
+    }
     return (
         <div>
             <Static laatu='hyvä' counter={props.hyva} />
@@ -76,6 +83,15 @@ class App extends React.Component {
             prossa
         )
     }
+    noStats = () => {
+        if ((this.state.hyva + this.state.neutraali + this.state.huono) == 0) {
+            return (
+                true
+            )
+        }
+        return false
+
+    }
 
 
     render() {
@@ -90,8 +106,10 @@ class App extends React.Component {
                 <div>
                     <h1>statistiikka</h1>
 
+
                     <Statistics hyva={this.state.hyva} neutraali={this.state.neutraali}
                         huono={this.state.huono} keskiarvo={this.keskiarvo()} posit={this.posit()} />
+
                 </div>
 
             </div>
