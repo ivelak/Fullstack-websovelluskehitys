@@ -19,8 +19,8 @@ const Statistics = (props) => {
             <Static laatu='hyvä' counter={props.hyva} />
             <Static laatu='neutraali' counter={props.neutraali} />
             <Static laatu='huono' counter={props.huono} />
-            <Static laatu='keskiarvo' counter={props.keskiarvo()} />
-            <Static laatu='positiivista' counter={props.posit() + ' %'} />
+            <Static laatu='keskiarvo' counter={props.keskiarvo} />
+            <Static laatu='positiivista' counter={props.posit + ' %'} />
         </div>
     )
 }
@@ -82,6 +82,7 @@ class App extends React.Component {
         return (
             <div>
                 <h1>anna palautetta</h1>
+
                 <Button klik={this.klikHyva} kuvaus="hyvä" />
                 <Button klik={this.klikNeutraali} kuvaus="neutraali" />
                 <Button klik={this.klikHuono} kuvaus="huono" />
@@ -89,11 +90,8 @@ class App extends React.Component {
                 <div>
                     <h1>statistiikka</h1>
 
-                    <Static laatu='hyvä' counter={this.state.hyva} />
-                    <Static laatu='neutraali' counter={this.state.neutraali} />
-                    <Static laatu='huono' counter={this.state.huono} />
-                    <Static laatu='keskiarvo' counter={this.keskiarvo()} />
-                    <Static laatu='positiivista' counter={this.posit() + ' %'} />
+                    <Statistics hyva={this.state.hyva} neutraali={this.state.neutraali}
+                        huono={this.state.huono} keskiarvo={this.keskiarvo()} posit={this.posit()} />
                 </div>
 
             </div>
