@@ -4,7 +4,11 @@ import './index.css';
 
 const Static = (props) => {
     return (
-        <div>{props.laatu} {props.counter}</div>
+
+        <tr>
+            <td>{props.laatu}</td><td>{props.counter}</td>
+        </tr>
+
     )
 }
 const Button = (props) => {
@@ -22,13 +26,17 @@ const Statistics = (props) => {
         )
     }
     return (
-        <div>
-            <Static laatu='hyvä' counter={props.hyva} />
-            <Static laatu='neutraali' counter={props.neutraali} />
-            <Static laatu='huono' counter={props.huono} />
-            <Static laatu='keskiarvo' counter={props.keskiarvo} />
-            <Static laatu='positiivista' counter={props.posit + ' %'} />
-        </div>
+
+        <table>
+            <tbody>
+                <Static laatu='hyvä' counter={props.hyva}/>
+                <Static laatu='neutraali' counter={props.neutraali}/>
+                <Static laatu='huono' counter={props.huono}/>
+                <Static laatu='keskiarvo' counter={props.keskiarvo}/>
+                <Static laatu='positiivista' counter={props.posit + ' %'}/>
+            </tbody>
+        </table>
+
     )
 }
 
@@ -46,7 +54,7 @@ class App extends React.Component {
 
 
         return () => {
-            this.setState({ 
+            this.setState({
                 [nappi]: this.state[nappi] + 1
             })
         }
@@ -111,7 +119,7 @@ class App extends React.Component {
                 <Button klik={this.klikNappia('hyva')} kuvaus="hyvä" />
                 <Button klik={this.klikNappia('neutraali')} kuvaus="neutraali" />
                 <Button klik={this.klikNappia('huono')} kuvaus="huono" />
-                
+
                 <div>
                     <h1>statistiikka</h1>
 
