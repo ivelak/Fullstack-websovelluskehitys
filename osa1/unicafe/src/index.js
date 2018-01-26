@@ -2,9 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-const Display = (props) => {
+const Static = (props) => {
     return (
         <div>{props.laatu} {props.counter}</div>
+    )
+}
+const Button = (props) => {
+    return (
+        <button onClick={props.klik}>{props.kuvaus}</button>
+    )
+}
+
+const Statistics = (props) => {
+    return (
+        <div>
+            <Static laatu='hyvä' counter={props.hyva} />
+            <Static laatu='neutraali' counter={props.neutraali} />
+            <Static laatu='huono' counter={props.huono} />
+            <Static laatu='keskiarvo' counter={props.keskiarvo()} />
+            <Static laatu='positiivista' counter={props.posit() + ' %'} />
+        </div>
     )
 }
 
@@ -39,7 +56,7 @@ class App extends React.Component {
     keskiarvo = () => {
         const ka = (this.state.hyva - this.state.huono) / (this.state.hyva + this.state.neutraali + this.state.huono)
         console.log(ka)
-        if (isNaN(ka)){
+        if (isNaN(ka)) {
             return (
                 0
             )
@@ -49,14 +66,14 @@ class App extends React.Component {
         )
     }
     posit = () => {
-        const prossa=(this.state.hyva/(this.state.hyva + this.state.neutraali + this.state.huono))*100
-        if (isNaN(prossa)){
+        const prossa = (this.state.hyva / (this.state.hyva + this.state.neutraali + this.state.huono)) * 100
+        if (isNaN(prossa)) {
             return (
                 0
             )
         }
         return (
-            prossa 
+            prossa
         )
     }
 
@@ -65,23 +82,24 @@ class App extends React.Component {
         return (
             <div>
                 <h1>anna palautetta</h1>
-                <button onClick={this.klikHyva}>hyvä</button>
-                <button onClick={this.klikNeutraali}>neutraali</button>
-                <button onClick={this.klikHuono}>huono</button>
+                <Button klik={this.klikHyva} kuvaus="hyvä" />
+                <Button klik={this.klikNeutraali} kuvaus="neutraali" />
+                <Button klik={this.klikHuono} kuvaus="huono" />
 
                 <div>
                     <h1>statistiikka</h1>
 
-                    <Display laatu='hyvä' counter={this.state.hyva} />
-                    <Display laatu='neutraali' counter={this.state.neutraali} />
-                    <Display laatu='huono' counter={this.state.huono} />
-                    <Display laatu='keskiarvo' counter={this.keskiarvo()} />
-                    <Display laatu='positiivista' counter={this.posit() + ' %'} />
+                    <Static laatu='hyvä' counter={this.state.hyva} />
+                    <Static laatu='neutraali' counter={this.state.neutraali} />
+                    <Static laatu='huono' counter={this.state.huono} />
+                    <Static laatu='keskiarvo' counter={this.keskiarvo()} />
+                    <Static laatu='positiivista' counter={this.posit() + ' %'} />
                 </div>
 
             </div>
         )
     }
 }
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
