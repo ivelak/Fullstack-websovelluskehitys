@@ -42,6 +42,15 @@ class App extends React.Component {
         }
     }
 
+    klikNappia = (nappi, arvo) => {
+
+
+        return () => {
+            this.setState({ 
+                [nappi]: this.state[nappi] + 1
+            })
+        }
+    }
     klikHyva = () => {
         console.log(this.state)
         this.setState({
@@ -84,7 +93,7 @@ class App extends React.Component {
         )
     }
     noStats = () => {
-        if ((this.state.hyva + this.state.neutraali + this.state.huono) == 0) {
+        if ((this.state.hyva + this.state.neutraali + this.state.huono) === 0) {
             return (
                 true
             )
@@ -99,10 +108,10 @@ class App extends React.Component {
             <div>
                 <h1>anna palautetta</h1>
 
-                <Button klik={this.klikHyva} kuvaus="hyvä" />
-                <Button klik={this.klikNeutraali} kuvaus="neutraali" />
-                <Button klik={this.klikHuono} kuvaus="huono" />
-
+                <Button klik={this.klikNappia('hyva')} kuvaus="hyvä" />
+                <Button klik={this.klikNappia('neutraali')} kuvaus="neutraali" />
+                <Button klik={this.klikNappia('huono')} kuvaus="huono" />
+                
                 <div>
                     <h1>statistiikka</h1>
 
