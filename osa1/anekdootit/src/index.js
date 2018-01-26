@@ -6,7 +6,7 @@ class App extends React.Component {
         super(props)
         this.state = {
             selected: 0,
-            votes: [0,0,0,0,0,0]
+            votes: [0, 0, 0, 0, 0, 0]
         }
     }
 
@@ -14,29 +14,43 @@ class App extends React.Component {
         let nmb = Math.floor(Math.random() * 6)
         return () => {
             this.setState({ selected: nmb })
-            
+
         }
     }
     addVote = () => {
         return () => {
             const a = this.state.votes[this.state.selected]
             const temparray = this.state.votes
-            temparray[this.state.selected]=a+1
+            temparray[this.state.selected] = a + 1
             this.setState({
-               votes: temparray
+                votes: temparray
             })
-            console.log(this.state.votes)
         }
+    }
+    findLeader = () => {
+        const tempvotes = this.state.votes
+        let biggest = 0
+
+        for (var i = 0; i < 6; i++) {
+            if (tempvotes[i] > tempvotes[biggest]) {
+                biggest = i
+            }
+        }
+        return biggest
     }
 
     render() {
-        console.log(this.state.selected)
         return (
             <div>
                 <p>{this.props.anecdotes[this.state.selected]}</p>
                 <p>has {this.state.votes[this.state.selected]} votes</p>
                 <button onClick={this.addVote()}>vote</button>
                 <button onClick={this.setNewRandom()}>next</button>
+                <div>
+                    <h1>anecdote with most votes:</h1>
+                    <p>{this.props.anecdotes[this.findLeader()]}</p>
+                    <p>has {this.state.votes[this.findLeader()]} votes</p>
+                </div>
             </div>
         )
     }
