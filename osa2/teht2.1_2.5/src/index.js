@@ -13,12 +13,14 @@ const Yhteensa = (props) => {
 }
 */
 const Kurssi = ({ kurssi }) => {
+  var tehtaviaYhteensa = kurssi.osat.reduce((summa, osa) => summa + osa.tehtavia, 0)
   return (
     <div>
       <Otsikko kurssi={kurssi} />
       <ul>
         {kurssi.osat.map(osa => <li key={osa.id}>{osa.nimi} {osa.tehtavia}</li>)}
       </ul>
+      <p>yhteensä {tehtaviaYhteensa} tehtävää</p>
     </div>
   )
 
