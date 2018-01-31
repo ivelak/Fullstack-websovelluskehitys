@@ -1,45 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Kurssit from './components/Kurssit'
 
-const Otsikko = (props) => <h1>{props.kurssi.nimi}</h1>
 
-/*
-const Yhteensa = (props) => {
-  const [osa1, osa2, osa3] = props.kurssi.osat
-
-  return (
-    <p>yhteensä {osa1.tehtavia + osa2.tehtavia + osa3.tehtavia} tehtävää</p>
-  )
-}
-*/
-
-const Kurssit = ({ kurssit }) => {
-
-  const Kurssi = ({ kurssi }) => {
-    var tehtaviaYhteensa = kurssi.osat.reduce((summa, osa) => summa + osa.tehtavia, 0)
-    return (
-      <div>
-        <Otsikko kurssi={kurssi} />
-        <ul>
-          {kurssi.osat.map(osa => <li key={osa.id}>{osa.nimi} {osa.tehtavia}</li>)}
-        </ul>
-        <p>yhteensä {tehtaviaYhteensa} tehtävää</p>
-      </div>
-    )
-
-  }
-
-  return (
-    <div>
-      <ul>
-        {kurssit.map(kurssi => <li key={kurssi.id}><Kurssi kurssi={kurssi} /></li>)}
-      </ul>
-    </div>
-  )
-}
 
 const App = () => {
-  const kurssit = [
+
+  const kaikkiKurssit = [
     {
       nimi: 'Half Stack -sovelluskehitys',
       id: 1,
@@ -78,9 +45,10 @@ const App = () => {
       ]
     }
   ]
+
   return (
     <div>
-      <Kurssit kurssit={kurssit} />
+      <Kurssit kurssit={kaikkiKurssit} />
     </div>
   )
 }
