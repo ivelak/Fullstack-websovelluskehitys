@@ -6,28 +6,55 @@ class App extends React.Component {
         super(props)
         this.state = {
             persons: [
-              { name: 'Arto Hellas' }
+                { name: 'Arto Hellas' }
             ],
-            newName: ''
+            newName: '',
+            duplicate: false
         }
     }
     addContact = (event) => {
         event.preventDefault()
         console.log('Lisäysnappi')
-        const newPerson = {
-            name: this.state.newName,
-            id: this.state.persons.length + 1
+        if (!this.state.duplicate) {
+            console.log('addContactcheck')
+            const newPerson = {
+                name: this.state.newName,
+            }
+            const persons = this.state.persons.concat(newPerson)
+
+            this.setState({
+                persons,
+                newName: ''
+            })
         }
 
-        const persons = this.state.persons.concat(newPerson)
+        else {
+            this.setState({
+                newName: ''
+            })
+        }
 
-        this.setState({
-            persons,
-            newName: ''
-        })
+
     }
     handleNameChange = (event) => {
-        this.setState({ newName: event.target.value})
+        this.setState({ newName: event.target.value })
+        const dublist = this.state.persons.filter(person => person.name === this.state.newName)
+        if (dublist.length > 0) {
+            console.log('dubtrue filtteri ei toimi!!')
+            this.setState({ duplicate: true })
+        } else {
+            this.setState({ duplicate: false })
+            console.log('dubfalse')
+        }
+    }
+    checkIfAlreadyInList = () => {
+        console.log('mennään tsekkaan')
+        const list = this.state.persons.filter(person => person.name === this.state.newName)
+        console.log(list.length)
+        if (list.length === 0) {
+            return false
+        }
+        return true
     }
 
     render() {
