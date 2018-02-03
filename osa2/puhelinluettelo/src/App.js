@@ -6,13 +6,15 @@ class App extends React.Component {
         super(props)
         this.state = {
             persons: [
-                {
-                    name: 'Arto Hellas',
-                    number: '040-1231231'
-                }
+                { name: 'Arto Hellas', number: '040-123456' },
+                { name: 'Martti Tienari', number: '040-123456' },
+                { name: 'Arto Järvinen', number: '040-123456' },
+                { name: 'Lea Kutvonen', number: '040-123456' }
             ],
             newName: '',
-            newNumber: ''
+            newNumber: '',
+            filter: ''
+
         }
     }
     addContact = (event) => {
@@ -48,12 +50,27 @@ class App extends React.Component {
     handleNumberChange = (event) => {
         this.setState({ newNumber: event.target.value })
     }
+    handleFilterChange = (event) => {
+        this.setState({ filter: event.target.value })
+        const filtered = this.state.persons.filter(per => per.name.toUpperCase().includes(event.target.value.toUpperCase()))
+        console.log(event.target.value, filtered.map(per=>per.name))
+    }
+    filteredPersons = () => {
+        if (this.state.filter.length === 0) return this.state.persons 
+        return this.state.persons.filter(per => per.name.toUpperCase().includes(this.state.filter.toUpperCase()))          
+    }
 
     render() {
         return (
             <div>
-                <h2>Puhelinluettelo</h2>
+                <h1>Puhelinluettelo</h1>
+                <div>
+                    rajaa näytettäviä: <input value={this.state.filter}
+                        onChange={this.handleFilterChange}
+                    />
+                </div>
                 <form>
+                    <h2>Lisää uusi</h2>
                     <div>
                         nimi: <input value={this.state.newName}
                             onChange={this.handleNameChange}
@@ -71,7 +88,7 @@ class App extends React.Component {
                 <h2>Numerot</h2>
                 <div>
                     <ul>
-                        {this.state.persons.map(person => <Person key={person.name} person={person} />)}
+                        {this.filteredPersons().map(person => <Person key={person.name} person={person} />)}
                     </ul>
                 </div>
 
