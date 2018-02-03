@@ -6,43 +6,48 @@ class App extends React.Component {
         super(props)
         this.state = {
             persons: [
-                { name: 'Arto Hellas' }
+                {
+                    name: 'Arto Hellas',
+                    number: '040-1231231'
+                }
             ],
             newName: '',
-            duplicate: false
+            newNumber: ''
         }
     }
     addContact = (event) => {
         event.preventDefault()
         console.log('Lisäysnappi')
-            const newPerson = {
-                name: this.state.newName,
-            }
-         
-            if (this.state.persons.filter(per => per.name === newPerson.name).length > 0){
-                console.log('virhe')
-                alert('Nimi on jo käytössä!')
-                this.setState({
-                    newName: ''
-                })
-            } else {
+        const newPerson = {
+            name: this.state.newName,
+            number: this.state.newNumber
+
+        }
+
+        if (this.state.persons.filter(per => per.name === newPerson.name).length > 0) {
+            console.log('virhe')
+            alert('Nimi on jo käytössä!')
+            this.setState({
+                newName: '',
+                newNumber: ''
+            })
+        } else {
             const persons = this.state.persons.concat(newPerson)
 
             this.setState({
                 persons,
-                newName: ''
+                newName: '',
+                newNumber: ''
             })
         }
     }
 
-
-
-    
     handleNameChange = (event) => {
         this.setState({ newName: event.target.value })
-        
     }
-    
+    handleNumberChange = (event) => {
+        this.setState({ newNumber: event.target.value })
+    }
 
     render() {
         return (
@@ -52,6 +57,11 @@ class App extends React.Component {
                     <div>
                         nimi: <input value={this.state.newName}
                             onChange={this.handleNameChange}
+                        />
+                    </div>
+                    <div>
+                        numero: <input value={this.state.newNumber}
+                            onChange={this.handleNumberChange}
                         />
                     </div>
                     <div>
