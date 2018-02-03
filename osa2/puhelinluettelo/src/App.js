@@ -15,11 +15,17 @@ class App extends React.Component {
     addContact = (event) => {
         event.preventDefault()
         console.log('Lisäysnappi')
-        if (!this.state.duplicate) {
-            console.log('addContactcheck')
             const newPerson = {
                 name: this.state.newName,
             }
+         
+            if (this.state.persons.filter(per => per.name === newPerson.name).length > 0){
+                console.log('virhe')
+                alert('Nimi on jo käytössä!')
+                this.setState({
+                    newName: ''
+                })
+            } else {
             const persons = this.state.persons.concat(newPerson)
 
             this.setState({
@@ -27,35 +33,16 @@ class App extends React.Component {
                 newName: ''
             })
         }
-
-        else {
-            this.setState({
-                newName: ''
-            })
-        }
-
-
     }
+
+
+
+    
     handleNameChange = (event) => {
         this.setState({ newName: event.target.value })
-        const dublist = this.state.persons.filter(person => person.name === this.state.newName)
-        if (dublist.length > 0) {
-            console.log('dubtrue filtteri ei toimi!!')
-            this.setState({ duplicate: true })
-        } else {
-            this.setState({ duplicate: false })
-            console.log('dubfalse')
-        }
+        
     }
-    checkIfAlreadyInList = () => {
-        console.log('mennään tsekkaan')
-        const list = this.state.persons.filter(person => person.name === this.state.newName)
-        console.log(list.length)
-        if (list.length === 0) {
-            return false
-        }
-        return true
-    }
+    
 
     render() {
         return (
