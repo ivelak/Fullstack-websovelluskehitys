@@ -1,54 +1,9 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": 1
-    },
-    {
-      "name": "Martti Tienari",
-      "number": "040-123456",
-      "id": 2
-    },
-    {
-      "name": "Arto Järvinen",
-      "number": "040-123456",
-      "id": 3
-    },
-    {
-      "name": "Lea Kutvonen",
-      "number": "040-123456",
-      "id": 4
-    },
-    {
-      "name": "pas",
-      "number": "123",
-      "id": 5
-    },
-    {
-      "name": "timppa",
-      "number": "445454",
-      "id": 6
-    },
-    {
       "name": "Pasi",
-      "number": "785463",
-      "id": 7
-    },
-    {
-      "name": "Pasipasi",
-      "number": "23434",
-      "id": 8
-    },
-    {
-      "name": "antti",
-      "number": "777",
-      "id": 9
-    },
-    {
-      "name": "venla",
-      "number": "43434",
-      "id": 10
+      "number": "1234",
+      "id": 1
     }
   ]
 }

@@ -52,6 +52,23 @@ class App extends React.Component {
         }
     }
 
+    removeContact = (killed) => {
+        return () => {
+            console.log('poistellaan')
+
+            personService
+                .remove(killed.id)
+                .then(person => {
+                    const templist = this.state.persons.filter(n => n.id !== killed.id)
+                    console.log(templist.map(pers => pers.name))
+                    this.setState({
+                        persons: templist
+                    })
+                })
+        }
+
+    }
+
     handleNameChange = (event) => {
         this.setState({ newName: event.target.value })
     }
@@ -96,7 +113,7 @@ class App extends React.Component {
                 <h2>Numerot</h2>
                 <div>
                     <ul>
-                        {this.filteredPersons().map(person => <Person key={person.name} person={person} />)}
+                        {this.filteredPersons().map(person => <Person key={person.id} person={person} remove={this.removeContact(person)} />)}
                     </ul>
                 </div>
 
