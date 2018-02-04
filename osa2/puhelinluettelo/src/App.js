@@ -1,21 +1,27 @@
-import React from 'react';
-import Person from './components/Person';
+import React from 'react'
+import Person from './components/Person'
+import axios from 'axios'
 
 class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            persons: [
-                { name: 'Arto Hellas', number: '040-123456' },
-                { name: 'Martti Tienari', number: '040-123456' },
-                { name: 'Arto Järvinen', number: '040-123456' },
-                { name: 'Lea Kutvonen', number: '040-123456' }
-            ],
+            persons: [],
             newName: '',
             newNumber: '',
             filter: ''
 
         }
+    }
+
+    componentWillMount() {
+        console.log('will mount')
+        axios
+            .get('http://localhost:3001/persons')
+            .then(response => {
+                console.log('promise fulfilled')
+                this.setState({ persons: response.data })
+            })
     }
     addContact = (event) => {
         event.preventDefault()
@@ -53,11 +59,11 @@ class App extends React.Component {
     handleFilterChange = (event) => {
         this.setState({ filter: event.target.value })
         const filtered = this.state.persons.filter(per => per.name.toUpperCase().includes(event.target.value.toUpperCase()))
-        console.log(event.target.value, filtered.map(per=>per.name))
+        console.log(event.target.value, filtered.map(per => per.name))
     }
     filteredPersons = () => {
-        if (this.state.filter.length === 0) return this.state.persons 
-        return this.state.persons.filter(per => per.name.toUpperCase().includes(this.state.filter.toUpperCase()))          
+        if (this.state.filter.length === 0) return this.state.persons
+        return this.state.persons.filter(per => per.name.toUpperCase().includes(this.state.filter.toUpperCase()))
     }
 
     render() {
