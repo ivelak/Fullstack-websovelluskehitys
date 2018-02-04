@@ -55,16 +55,17 @@ class App extends React.Component {
     removeContact = (killed) => {
         return () => {
             console.log('poistellaan')
-
-            personService
-                .remove(killed.id)
-                .then(person => {
-                    const templist = this.state.persons.filter(n => n.id !== killed.id)
-                    console.log(templist.map(pers => pers.name))
-                    this.setState({
-                        persons: templist
+            if (window.confirm('Poistellaanko '+ killed.name)) {
+                personService
+                    .remove(killed.id)
+                    .then(person => {
+                        const templist = this.state.persons.filter(n => n.id !== killed.id)
+                        console.log(templist.map(pers => pers.name))
+                        this.setState({
+                            persons: templist
+                        })
                     })
-                })
+            }
         }
 
     }
