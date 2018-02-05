@@ -33,8 +33,18 @@ class App extends React.Component {
         }
 
         if (this.state.persons.filter(per => per.name === newPerson.name).length > 0) {
-            console.log('virhe')
-            alert('Nimi on jo käytössä!')
+            const pers = this.state.persons.find(person => person.name === newPerson.name)
+            console.log('pers', pers.name)
+
+            if (window.confirm(pers.name + ' on jo luettelossa, korvataanko vanha numero uudella?')) {
+                personService
+                    .update(pers.id, newPerson)
+                    .then(newPerson => {
+                        this.setState({
+                            persons: this.state.persons.map(person => person.id !== pers.id ? person : newPerson)
+                        })
+                    })
+            }
             this.setState({
                 newName: '',
                 newNumber: ''
@@ -55,7 +65,7 @@ class App extends React.Component {
     removeContact = (killed) => {
         return () => {
             console.log('poistellaan')
-            if (window.confirm('Poistellaanko '+ killed.name)) {
+            if (window.confirm('Poistellaanko ' + killed.name)) {
                 personService
                     .remove(killed.id)
                     .then(person => {
