@@ -1,26 +1,6 @@
 {
   "persons": [
     {
-      "name": "jorma",
-      "number": "444444",
-      "id": 2
-    },
-    {
-      "name": "masi",
-      "number": "33333",
-      "id": 3
-    },
-    {
-      "name": "jami",
-      "number": "23232",
-      "id": 4
-    },
-    {
-      "name": "jammu",
-      "number": "2332",
-      "id": 5
-    },
-    {
       "name": "jalmari",
       "number": "343434",
       "id": 6
@@ -29,11 +9,6 @@
       "name": "gfgfgf",
       "number": "555",
       "id": 8
-    },
-    {
-      "name": "dfdf",
-      "number": "44",
-      "id": 9
     }
   ]
 }

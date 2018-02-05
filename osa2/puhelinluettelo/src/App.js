@@ -49,7 +49,17 @@ class App extends React.Component {
                         setTimeout(() => {
                             console.log('timeout')
                             this.setState({ error: null })
-                          }, 5000)
+                        }, 5000)
+                    })
+                    .catch(error => {
+                        this.setState({
+                            error: `henkilö '${pers.name}' on jo valitettavasti poistettu palvelimelta`,
+                            persons: this.state.persons.filter(n => n.id !== pers.id)
+                          })
+                          setTimeout(() => {
+                            console.log('timeout')
+                            this.setState({ error: null })
+                        }, 5000)
                     })
             }
             this.setState({
@@ -70,10 +80,10 @@ class App extends React.Component {
                     setTimeout(() => {
                         console.log('timeout')
                         this.setState({ error: null })
-                      }, 5000)
+                    }, 5000)
                 })
-                
-                
+
+
         }
     }
 
@@ -93,7 +103,7 @@ class App extends React.Component {
                         setTimeout(() => {
                             console.log('timeout')
                             this.setState({ error: null })
-                          }, 5000)
+                        }, 5000)
                     })
             }
         }
