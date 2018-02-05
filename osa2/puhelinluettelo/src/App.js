@@ -1,6 +1,7 @@
 import React from 'react'
 import Person from './components/Person'
 import personService from './services/persons'
+import Notification from './components/Notification'
 
 class App extends React.Component {
     constructor(props) {
@@ -9,7 +10,8 @@ class App extends React.Component {
             persons: [],
             newName: '',
             newNumber: '',
-            filter: ''
+            filter: '',
+            error: null
 
         }
     }
@@ -41,8 +43,13 @@ class App extends React.Component {
                     .update(pers.id, newPerson)
                     .then(newPerson => {
                         this.setState({
-                            persons: this.state.persons.map(person => person.id !== pers.id ? person : newPerson)
+                            persons: this.state.persons.map(person => person.id !== pers.id ? person : newPerson),
+                            error: 'numero korvattu'
                         })
+                        setTimeout(() => {
+                            console.log('timeout')
+                            this.setState({ error: null })
+                          }, 5000)
                     })
             }
             this.setState({
@@ -56,9 +63,17 @@ class App extends React.Component {
                     this.setState({
                         persons: this.state.persons.concat(pers),
                         newName: '',
-                        newNumber: ''
+                        newNumber: '',
+                        error: `henkilö ${pers.name} lisätty`
+
                     })
+                    setTimeout(() => {
+                        console.log('timeout')
+                        this.setState({ error: null })
+                      }, 5000)
                 })
+                
+                
         }
     }
 
@@ -72,8 +87,13 @@ class App extends React.Component {
                         const templist = this.state.persons.filter(n => n.id !== killed.id)
                         console.log(templist.map(pers => pers.name))
                         this.setState({
-                            persons: templist
+                            persons: templist,
+                            error: 'henkilö poistettu'
                         })
+                        setTimeout(() => {
+                            console.log('timeout')
+                            this.setState({ error: null })
+                          }, 5000)
                     })
             }
         }
@@ -100,6 +120,9 @@ class App extends React.Component {
         return (
             <div>
                 <h1>Puhelinluettelo</h1>
+
+                <Notification message={this.state.error} />
+
                 <div>
                     rajaa näytettäviä: <input value={this.state.filter}
                         onChange={this.handleFilterChange}
