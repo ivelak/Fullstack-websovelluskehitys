@@ -23,7 +23,7 @@ class App extends React.Component {
             .then(persons => {
                 this.setState({ persons })
             })
-    }
+    }   
 
     addContact = (event) => {
         event.preventDefault()
