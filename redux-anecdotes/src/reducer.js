@@ -26,11 +26,16 @@ const reducer = (state = initialState, action) => {
       const anecdoteToChange = state.find(n => n.id === id)
       const changedAnecdote = { ...anecdoteToChange, votes: anecdoteToChange.votes + 1 }
       return state.map(anecdote => anecdote.id !== id ? anecdote : changedAnecdote)
+    case 'NEW_ANECDOTE':
+      const newId = getId()
+      const newAnecdote = { content: action.data.anecdote, id: newId, votes: 0 }
+      return [...state, newAnecdote]
+    default:
+      return state
 
-      console.log('state now: ', state)
-      console.log('action', action)
+
   }
-  return state
+
 }
 
 export default reducer
