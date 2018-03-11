@@ -1,5 +1,5 @@
+
 import React from 'react'
-import { anecdoteVote } from './../reducers/anecdoteReducer'
 
 class AnecdoteList extends React.Component {
   render() {
@@ -14,8 +14,8 @@ class AnecdoteList extends React.Component {
             </div>
             <div>
               has {anecdote.votes}
-              <button onClick={() =>
-                this.props.store.dispatch(anecdoteVote(anecdote.id))
+              <button onClick={() => 
+                this.props.store.dispatch({ type: 'VOTE', id: anecdote.id })
               }>
                 vote
               </button>
